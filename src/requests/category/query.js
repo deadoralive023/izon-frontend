@@ -5,6 +5,7 @@ const GET_CATEGORIES = gql`
         categories{
             id
             name
+            imageUrl
         }
     }
 `;

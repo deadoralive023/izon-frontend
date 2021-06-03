@@ -1,8 +1,13 @@
-import { useQuery } from '@apollo/react-hooks'
-import GET_CATEGORIES from '../requests/category/query.js'
+import CategoriesPage from '../components/categories/index.js'
+import { Header } from '../components/layout/header.js'
+import { Content } from '../components/layout/content.js'
 
-export default function Categories(){
-    const { loading, error, data}  = useQuery(GET_CATEGORIES);
-    console.log(data);
-    return loading ? <h2> Loading! </h2> : <p> {data.categories[0].name}</p>
+export const App = () => {
+    return (
+        <div className="App">
+            <Header />
+            <Content />
+        </div>
+    )
 }
+
