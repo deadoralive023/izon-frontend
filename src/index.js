@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.css';
-import App from './components/App.js';
+import Categories from './components/App.js';
 import { ApolloProvider } from '@apollo/react-hooks'
 import reportWebVitals from './reportWebVitals';
 import client from './client.js'
@@ -9,7 +9,7 @@ import client from './client.js'
 const Root = () => (
  <React.StrictMode>
       <ApolloProvider client={client}> 
-          <App />
+          <Categories />
       </ApolloProvider>
   </React.StrictMode>
 );

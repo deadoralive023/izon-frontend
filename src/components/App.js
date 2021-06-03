@@ -1,25 +1,8 @@
-import logo from '../logo.svg';
-import '../styles/App.css';
+import { useQuery } from '@apollo/react-hooks'
+import GET_CATEGORIES from '../requests/category/query.js'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function Categories(){
+    const { loading, error, data}  = useQuery(GET_CATEGORIES);
+    console.log(data);
+    return loading ? <h2> Loading! </h2> : <p> {data.categories[0].name}</p>
 }
-
-export default App;
