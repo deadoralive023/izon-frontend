@@ -8,6 +8,8 @@ import GET_PRODUCTS from '../../requests/product/query.js'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    margin: 4
+
   },
   paper: {
     height: 140,

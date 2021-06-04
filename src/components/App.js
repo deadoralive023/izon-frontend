@@ -5,15 +5,20 @@ import { Products } from '../components/ProductsPage'
 import { Categories } from '../components/CategoriesPage/index.js'
 import { Navbar } from '../components/Navbar/index.js'
 
+import { Footer } from '../components/Footer/index.js'
+
+
 
 
 export const App = () => {
     return (
         <div className="App">
-             <Navbar />
-            
-             {/* <Products /> */}
-             <Categories />
+            <Navbar />
+        
+            <Products />
+            {/* <Categories /> */}
+
+            <Footer />
 
         </div>
     )
