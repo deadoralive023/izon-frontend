@@ -4,19 +4,8 @@ import Grid from '@material-ui/core/Grid';
 import { useQuery } from '@apollo/react-hooks'
 import { Product } from './ProductCard'
 import GET_PRODUCTS from '../../requests/product/query.js'
+import { useStyles } from './styles.js'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    height: 140,
-    width: 100,
-  },
-  control: {
-    padding: theme.spacing(2),
-  },
-}));
 
 export const  Products = () => {
     const [spacing, setSpacing] = React.useState(2);
