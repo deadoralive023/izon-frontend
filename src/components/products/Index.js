@@ -2,12 +2,13 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { useQuery } from '@apollo/react-hooks'
-import { Product } from './product.js'
+import { Product } from './Product.js'
 import GET_PRODUCTS from '../../requests/product/query.js'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    margin: 4
   },
   paper: {
     height: 140,
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const  Products = () => {
+export const Products = () => {
     const [spacing, setSpacing] = React.useState(2);
     const classes = useStyles();
     const handleChange = (event) => {
@@ -28,9 +29,15 @@ export const  Products = () => {
     const { loading, error, data}  = useQuery(GET_PRODUCTS);
     if(!loading){
         return (
-            <Grid container className={classes.root} spacing={2}>
+            <Grid 
+            container 
+            className={classes.root} 
+            spacing={2}>
               <Grid item xs={12}>
-                <Grid container justify="center" spacing={spacing}>
+                <Grid 
+                container 
+                justify="center" 
+                spacing={spacing}>
                   {data.products.map((product) => (
                     <Grid key={product.id} item>
                         <Product data={product} />
