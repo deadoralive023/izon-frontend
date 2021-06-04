@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { useQuery } from '@apollo/react-hooks'
-import { Product } from './product.js'
+import { Product } from './ProductCard'
 import GET_PRODUCTS from '../../requests/product/query.js'
 
 const useStyles = makeStyles((theme) => ({

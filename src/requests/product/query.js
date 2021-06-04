@@ -5,7 +5,6 @@ const GET_PRODUCTS = gql`
         products{
             id
             name
-            stock
             price
             imageUrl
         }
