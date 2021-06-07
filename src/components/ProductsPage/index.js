@@ -2,11 +2,11 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { useQuery } from '@apollo/react-hooks'
-import { Product } from './ProductCard'
+import { ProductCard } from './ProductCard'
 import { GET_PRODUCTS }  from '../../requests/product/query.js'
 import { useStyles } from './styles.js'
 
-export const  Products = () => {
+export const  Products = ({setCurrentPage}) => {
     const [spacing, setSpacing] = React.useState(2);
     const classes = useStyles();
     const handleChange = (event) => {
@@ -21,7 +21,7 @@ export const  Products = () => {
                 <Grid container justify="center" spacing={spacing}>
                   {data.products.map((product) => (
                     <Grid key={product.id} item>
-                        <Product data={product} />
+                        <ProductCard data={product} setCurrentPage={setCurrentPage} />
                     </Grid>
                   ))}
                 </Grid>

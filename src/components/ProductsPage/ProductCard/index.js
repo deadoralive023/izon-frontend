@@ -10,12 +10,20 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { ThemeProvider } from '@material-ui/styles';
 import {useStyles, TypographyTheme } from './styles.js'
+import {ProductShow} from '../ProductShow'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 
 
-export const Product = ({data}) => {
+
+export const ProductCard = ({data, setCurrentPage}) => {
     const classes = useStyles();
     return (
-        <Card className={classes.root}>
+        <Card className={classes.root} onClick={()=>setCurrentPage("ProductShow")}>
             <CardActionArea>
               <CardMedia component="img" alt="Contemplative Reptile" height="200" image={data.imageUrl}title={data.name} />
                   <CardContent className={classes.cardContent}>
