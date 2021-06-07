@@ -1,16 +1,8 @@
 import { Products } from '../components/ProductsPage'
-import { Categories } from '../components/CategoriesPage/index.js'
 import { ProductShow } from '../components/ProductsPage/ProductShow'
 import { Navbar } from '../components/Navbar/index.js'
-
 import { Footer } from '../components/Footer/index.js'
-
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
+import { Routes } from '../Router.js'
 
 
 
@@ -38,30 +30,11 @@ import {
 
 export const App = () => {
     return (
-      <Router>
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-            <Switch>
-                <Route path="/" exact>
-                    <Products />
-                </Route>
-                <Route path="/categories" exact>
-                    <Categories />
-                </Route>
-            </Switch>
-        </Router>
-
-
-            {/* <Navbar />
-        
-            <Products />
-            <Categories />
-
-            <Footer /> */}
-
-            <Footer />
-            
-        </div>
+        <>
+        <Navbar />
+        <Routes />
+        <Footer />
+        </>
     )
 }
 
