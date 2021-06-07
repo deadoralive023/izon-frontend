@@ -12,7 +12,6 @@ import { ThemeProvider } from '@material-ui/styles';
 import {useStyles, TypographyTheme } from './styles.js'
 
 
-
 export const Product = ({data}) => {
     const classes = useStyles();
     return (

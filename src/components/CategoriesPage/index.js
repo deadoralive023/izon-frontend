@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { useQuery } from '@apollo/react-hooks'
 
-import Category from './Category.js'
+import Category from './Category/index.js'
 
 import GET_CATEGORIES from '../../requests/category/query.js'
 

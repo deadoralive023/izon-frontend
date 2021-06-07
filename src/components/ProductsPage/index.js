@@ -6,7 +6,6 @@ import { Product } from './ProductCard'
 import { GET_PRODUCTS }  from '../../requests/product/query.js'
 import { useStyles } from './styles.js'
 
-
 export const  Products = () => {
     const [spacing, setSpacing] = React.useState(2);
     const classes = useStyles();
