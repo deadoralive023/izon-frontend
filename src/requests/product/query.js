@@ -11,4 +11,20 @@ const GET_PRODUCTS = gql`
     }
 `;
 
-export default GET_PRODUCTS
+
+const GET_SHOW_PRODUCT = gql`
+    query{
+        products{
+            id
+            name
+            price
+            description
+            imageUrl
+        }
+    }
+`;
+
+export {
+    GET_PRODUCTS,
+    GET_SHOW_PRODUCT
+}
