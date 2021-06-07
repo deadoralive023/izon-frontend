@@ -5,7 +5,7 @@ export const useStyles = makeStyles({
     root: {
         width: 250,
     },
-    cardContent: {
+    cardcontent: {
         height: 120,
     }
 });
@@ -15,4 +15,3 @@ export const TypographyTheme = createMuiTheme({
         tmlFontSize: 18,
     }
 })
-

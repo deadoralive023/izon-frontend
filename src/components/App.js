@@ -1,8 +1,6 @@
-// import { Header } from '../components/layout/header.js'
-// import { Content } from '../components/layout/content.js'
-
 import { Products } from '../components/ProductsPage'
 import { Categories } from '../components/CategoriesPage/index.js'
+import { ProductShow } from '../components/ProductsPage/ProductShow'
 import { Navbar } from '../components/Navbar/index.js'
 
 import { Footer } from '../components/Footer/index.js'
@@ -40,11 +38,7 @@ import {
 
 export const App = () => {
     return (
-        
-        <div className="App">
-        <Navbar />
-        
-        <Router>
+      <Router>
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
             <Switch>
