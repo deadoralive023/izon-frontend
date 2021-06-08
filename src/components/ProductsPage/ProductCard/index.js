@@ -6,7 +6,6 @@ import useStyles from './styles'
 
 export const ProductCard = ({product, setCurrentPage}) => {
     const classes = useStyles();
-    console.log(product)
     return (
         <Card className={classes.root}>
             <CardMedia className={classes.media} component="img" image={product.imageUrl} title={product.name}/>
