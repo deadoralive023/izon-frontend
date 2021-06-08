@@ -1,45 +1,27 @@
 import React, { useState } from 'react'
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Rating from '@material-ui/lab/Rating';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import { ThemeProvider } from '@material-ui/styles';
-import {useStyles, TypographyTheme } from './styles.js'
-import {ProductShow} from '../ProductShow'
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
+import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } from '@material-ui/core'
+import { AddShoppingCart } from '@material-ui/icons' 
+import useStyles from './styles'
 
 
-
-export const ProductCard = ({data, setCurrentPage}) => {
+export const ProductCard = ({product, setCurrentPage}) => {
     const classes = useStyles();
+    console.log(product)
     return (
-        <Card className={classes.root} onClick={()=>setCurrentPage("ProductShow")}>
-            <CardActionArea>
-              <CardMedia component="img" alt="Contemplative Reptile" height="200" image={data.imageUrl}title={data.name} />
-                  <CardContent className={classes.cardContent}>
-                    <ThemeProvider theme={TypographyTheme}>
-                        <Typography>
-                          {data.name}
-                        </Typography>
-                        <Typography  variant="body1" display="inline" color="textSecondary" component="p">
-                          <b>Price:</b> {data.price}$
-                        </Typography>
-                    </ThemeProvider>
-                </CardContent>
-            </CardActionArea>
-            <CardActions>
-                <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
+        <Card className={classes.root}>
+            <CardMedia className={classes.media} component="img" image={product.imageUrl} title={product.name}/>
+            <CardContent>
+                <div className={classes.cardContent}>
+                    <Typography variant="h6" gutterBottom>{product.name.substring(0, 30)}...</Typography>
+                    <Typography variant="h5">${product.price}</Typography>
+                </div>
+                <Typography variant="body2" color="textSecondary">{product.description}</Typography>
+            </CardContent>
+            <CardActions disableSpacing className={classes.cardActions}>
+                <IconButton aria-label="Add to Cart">
+                    <AddShoppingCart />
+                </IconButton>
             </CardActions>
         </Card>
-    );
+    )
 }
