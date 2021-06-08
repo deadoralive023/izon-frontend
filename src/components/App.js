@@ -38,26 +38,21 @@ import {
 
 export const App = () => {
     return (
-      <Router>
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-            <Switch>
-                <Route path="/" exact>
-                    <Products />
-                </Route>
-                <Route path="/categories" exact>
-                    <Categories />
-                </Route>
-            </Switch>
-        </Router>
+        <div>
+            <Navbar />
 
-
-            {/* <Navbar />
-        
-            <Products />
-            <Categories />
-
-            <Footer /> */}
+            <Router>
+            {/* A <Switch> looks through its children <Route>s and
+                renders the first one that matches the current URL. */}
+                <Switch>
+                    <Route path="/" exact>
+                        <Products />
+                    </Route>
+                    <Route path="/categories" exact>
+                        <Categories />
+                    </Route>
+                </Switch>
+            </Router>
 
             <Footer />
             
