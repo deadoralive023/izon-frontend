@@ -1,35 +1,33 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { useQuery } from '@apollo/react-hooks'
 import { ProductCard } from './ProductCard'
-import { GET_PRODUCTS }  from '../../requests/product/query.js'
-import { useStyles } from './styles.js'
+import { useStyles } from './styles'
+import productsMachine from '../../machines/ProductsMachine.js'
+import { useMachine } from "@xstate/react";
 
 export const  Products = ({setCurrentPage}) => {
-    const [spacing, setSpacing] = React.useState(2);
     const classes = useStyles();
-    const handleChange = (event) => {
-        setSpacing(Number(event.target.value));
-    };
+    const [state, send] = useMachine(productsMachine)
 
-    const { loading, error, data}  = useQuery(GET_PRODUCTS);
-    if(!loading){
-        return (
-            <Grid container className={classes.root} spacing={2}>
-              <Grid item xs={12}>
-                <Grid container justify="center" spacing={spacing}>
-                  {data.products.map((product) => (
-                    <Grid key={product.id} item>
-                        <ProductCard data={product} setCurrentPage={setCurrentPage} />
-                    </Grid>
-                  ))}
-                </Grid>
-              </Grid>
+    const products = state.matches("success") ? state.context.products : null
+
+    return (
+        state.matches("success") ?
+        <main>
+            <Grid container justify="center" spacing={4}>
+                {
+                    products.map((product) => (
+                        <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
+                            <ProductCard product={product} />
+                        </Grid>
+                    ))
+                }
             </Grid>
-        );
-    }
-    else{
-        return <h3> Loading Products! </h3>
-    }
+        </main> : 
+        <h1> Loading </h1>
+
+
+        
+    )
 }
