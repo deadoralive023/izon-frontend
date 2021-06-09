@@ -2,7 +2,9 @@ import React from 'react';
 import { Typography, Button, Card, CardActions, CardContent, CardMedia} from '@material-ui/core'
 import useStyles from './styles'
 
+
 export const Cart = ({item}) => {
+
     const classes = useStyles()
     return(
         <Card>
@@ -20,6 +22,7 @@ export const Cart = ({item}) => {
 
                 </div>
             </CardActions>
+
         </Card>
 
     )

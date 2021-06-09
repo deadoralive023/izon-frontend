@@ -3,7 +3,9 @@ import { Container, Typography, Button, Grid } from '@material-ui/core'
 import useStyles from './styles'
 import CartItem from './CartItem'
 
-export const Cart = ({setCurrentPage}) => {    
+
+export const Cart = ({cart, setCurrentPage}) => {    
+
     const classes = useStyles()
     const isEmpty = !cart.items.length;
     const EmptyCart = () => (
@@ -11,6 +13,7 @@ export const Cart = ({setCurrentPage}) => {
     )
 
     const FilledCart = () => (
+
         <h2>heading</h2>
             // <Grid container spacing={3}>
             //     cart.items.map((item) => (
@@ -28,7 +31,6 @@ export const Cart = ({setCurrentPage}) => {
             //     </div>
             // </div>
     )
-
 
 
     return(

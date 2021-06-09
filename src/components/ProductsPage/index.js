@@ -12,6 +12,7 @@ export const  Products = ({setCurrentPage}) => {
 
     const products = state.matches("success") ? state.context.products : null
 
+
     function fun(){
         setCurrentPage("Cart");
     }
@@ -20,6 +21,7 @@ export const  Products = ({setCurrentPage}) => {
         state.matches("success") ?
         <main>
             <Grid container justify="center" spacing={4} onClick={fun}>
+
                 {
                     products.map((product) => (
                         <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
@@ -30,6 +32,6 @@ export const  Products = ({setCurrentPage}) => {
             </Grid>
         </main> : 
         <h1> Loading </h1>
-        
+  
     )
 }

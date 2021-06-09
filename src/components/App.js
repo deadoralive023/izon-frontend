@@ -4,7 +4,9 @@ import { Navbar } from '../components/Navbar/index.js'
 import { Footer } from '../components/Footer/index.js'
 import { Routes } from '../Router.js'
 
+
 import { Categories } from '../components/CategoriesPage/index.js'
+
 
 //   return (
 //     <Router>
@@ -33,8 +35,10 @@ export const App = () => {
         <Navbar />
         <Routes />
 
+
         {/* <ProductShow/> */}
         {/* <Categories /> */}
+
         <Footer />
         </>
     )
