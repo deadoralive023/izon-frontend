@@ -5,11 +5,12 @@ import { Footer } from '../components/Footer/index.js'
 import { Routes } from '../Router.js'
 
 
+import { Categories } from '../components/CategoriesPage/index.js'
+
 
 //   return (
 //     <Router>
 //       <div>
-
 //         {/* A <Switch> looks through its children <Route>s and
 //             renders the first one that matches the current URL. */}
 //         <Switch>
@@ -33,6 +34,11 @@ export const App = () => {
         <>
         <Navbar />
         <Routes />
+
+
+        {/* <ProductShow/> */}
+        {/* <Categories /> */}
+
         <Footer />
         </>
     )
