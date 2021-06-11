@@ -15,7 +15,7 @@ export const  Pages = () => {
         currentPage === "Products" ?  <Products setCurrentPage={setCurrentPage}/> :
         currentPage === "ProductShow" ? <ProductShow setCurrentPage={setCurrentPage}/> :
         currentPage === "Categories" ? <Categories setCurrentPage={setCurrentPage}/> :
-        currentPage === "CheckoutModal" ?  <CheckoutModal setCurrentPage={setCurrentPage}/> : null
+        currentPage === "CheckoutModal" ?  <CheckoutModal setCurrentPage={setCurrentPage} /> :
         currentPage === "Cart" ? <Cart setCurrentPage={setCurrentPage}/> : null
     )
 }
