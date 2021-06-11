@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import { useQuery } from '@apollo/react-hooks'
 import { ProductCard } from './ProductCard'
 import { GET_PRODUCTS }  from '../../requests/product/query.js'
-import { useStyles } from './styles'
+import { useStyles }  from './styles'
 
 export const  Products = ({setCurrentPage}) => {
     const classes = useStyles();
