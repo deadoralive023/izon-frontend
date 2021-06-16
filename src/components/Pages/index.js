@@ -8,7 +8,7 @@ import { Cart } from '../Cart'
 
 
 export const  Pages = () => {
-    const [currentPage, setCurrentPage] = useState("Products");
+    const [currentPage, setCurrentPage] = useState("Categories");
 
     return (
         currentPage === "Products" ?  <Products setCurrentPage={setCurrentPage}/> :
