@@ -2,6 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { useQuery } from '@apollo/react-hooks'
 import { ProductCard } from './ProductCard'
+import { GET_PRODUCTS }  from '../../requests/product/query.js'
 import  useStyles from './styles'
 import productsMachine from '../../machines/ProductsMachine.js'
 import { useMachine } from "@xstate/react";
