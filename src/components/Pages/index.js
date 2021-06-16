@@ -9,7 +9,9 @@ import { Cart } from '../Cart'
 
 
 export const  Pages = () => {
-    const [currentPage, setCurrentPage] = useState("CheckoutModal");
+
+    const [currentPage, setCurrentPage] = useState("Categories");
+
 
     return (
         currentPage === "Products" ?  <Products setCurrentPage={setCurrentPage}/> :
