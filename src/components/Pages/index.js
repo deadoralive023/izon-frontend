@@ -3,6 +3,8 @@ import { Products } from '../ProductsPage'
 import { Categories } from '../CategoriesPage/index.js'
 import { ProductShow } from '../ProductsPage/ProductShow'
 import CheckoutModal from '../CheckoutModal'
+// import { Navbar } from '../Navbar/index.js'
+
 
 
 import { Cart } from '../Cart'
