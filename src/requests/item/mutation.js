@@ -56,6 +56,18 @@ const UPDATE_ITEM_QUANTITY = gql`
         }
     }
 `;
+
+const REMOVE_ITEM_FROM_CART = gql`
+    mutation RemoveItemFromCart($item_id: ID!)
+    {
+        removeItemFromCart(input: {itemId: $item_id})
+        {
+            itemId
+        }
+    }
+`;
+
+
 // mutation{
 //     changeItemQuantity(input: {
 //       itemId: 1  
@@ -70,7 +82,8 @@ const UPDATE_ITEM_QUANTITY = gql`
 //     }
 //   }
 
-export default UPDATE_ITEM_QUANTITY
-// export {
-//     UPDATE_ITEM_QUANTITY
-// }
+// export default UPDATE_ITEM_QUANTITY
+export {
+    UPDATE_ITEM_QUANTITY,
+    REMOVE_ITEM_FROM_CART
+}
