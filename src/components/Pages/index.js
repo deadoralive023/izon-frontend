@@ -10,7 +10,7 @@ import { Cart } from '../Cart'
 
 export const  Pages = () => {
 
-    const [currentPage, setCurrentPage] = useState("Categories");
+    const [currentPage, setCurrentPage] = useState("Cart");
 
 
     return (

@@ -18,7 +18,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Divider from '@material-ui/core/Divider';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
-import UPDATE_ITEM_QUANTITY from '../../../requests/item/mutation'
+import {UPDATE_ITEM_QUANTITY, REMOVE_ITEM_FROM_CART} from '../../../requests/item/mutation'
+import GET_CART from '../../../requests/cart/query.js'
+
 
 import { useMutation } from '@apollo/react-hooks'
 
@@ -50,11 +52,13 @@ const useStyles = makeStyles((theme) => ({
 
 const Numbers = [1,2,3,4,5,6,7,8,9];
 
-export const CartItem = ({item}) => {  
+export const CartItem = ({item} ) => {  
 
   const classes = useStyles();
 
   const [updateItemQuantity, { data }] = useMutation(UPDATE_ITEM_QUANTITY);
+  const [removeItemFromCart] = useMutation(REMOVE_ITEM_FROM_CART);
+
   const [quantity, setQuantity] = useState(item.quantity);
 
 
@@ -67,6 +71,22 @@ export const CartItem = ({item}) => {
     console.log("In handle Update method", quantity)
 
     updateItemQuantity({ variables: { item_id: item.id , quantity: quantity} });
+  };
+
+  const handleRemove = () => {
+    console.log("In handle Remove Item method", quantity)
+
+    removeItemFromCart({ 
+      variables: { item_id: item.id},
+      refetchQueries: [
+        {
+          query: GET_CART,
+          variables: {user_id: '1'}
+        }
+      ],
+
+    });
+
   };
 
   
@@ -99,7 +119,7 @@ export const CartItem = ({item}) => {
 
               <Grid
                 item
-                xs={10}
+                // xs={10}
                 container
                 direction="row"
                 justify="flex-start"
@@ -163,8 +183,10 @@ export const CartItem = ({item}) => {
                             size="small"
                             className={classes.button}
                             startIcon={<DeleteIcon />}
+                          onClick = {handleRemove}
+
                         >
-                            Delete
+                            Remove
                         </Button>
                     </Typography>
                 </Grid>
