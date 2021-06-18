@@ -21,12 +21,12 @@ export const  Products = ({setCurrentPage}) => {
     return (
         state.matches("success") ?
         <main>
-            <Grid container justify="center" spacing={4} onClick={fun}>
+            <Grid container justify="center" spacing={4}>
 
                 {
                     products.map((product) => (
                         <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
-                            <ProductCard product={product} />
+                            <ProductCard product={product} setCurrentPage ={setCurrentPage}/>
                         </Grid>
                     ))
                 }

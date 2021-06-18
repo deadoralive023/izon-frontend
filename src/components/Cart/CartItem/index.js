@@ -7,7 +7,6 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 
 import { palette } from '@material-ui/system';
 
-// import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -20,7 +19,6 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 import {UPDATE_ITEM_QUANTITY, REMOVE_ITEM_FROM_CART} from '../../../requests/item/mutation'
 import GET_CART from '../../../requests/cart/query.js'
-
 
 import { useMutation } from '@apollo/react-hooks'
 
