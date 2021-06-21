@@ -8,9 +8,9 @@ import { useMachine } from '@xstate/react'
 
 
 export const  Products = ({params, setCurrentPage}) => {
-  const classes = useStyles();
   const [ state, send ] = useMachine(machine)
   const { products } = state.context
+  console.log(state.value)
 
   return (
     state.matches("idle") ?
