@@ -50,6 +50,11 @@ const machine = createMachine({
         }
       },
     },
+    paymentProcess: {
+      },
+    sucess: {
+    
+    }
 
   }
 }, 

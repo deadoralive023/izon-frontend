@@ -4,10 +4,15 @@ import { AddShoppingCart } from '@material-ui/icons'
 import useStyles from './styles'
 
 
-export const ProductCard = ({product, setCurrentPage}) => {
+export const ProductCard = ({product, send, setCurrentPage, params}) => {
     const classes = useStyles();
+
+    function handleClick(){
+        params.id = product.id
+        send('ITEM_CLICKED', {setCurrentPage: setCurrentPage})
+    }
     return (
-        <Card className={classes.root}>
+        <Card className={classes.root} onClick={handleClick}>
             <CardMedia className={classes.media} component="img" image={product.imageUrl} title={product.name}/>
             <CardContent>
                 <div className={classes.cardContent}>

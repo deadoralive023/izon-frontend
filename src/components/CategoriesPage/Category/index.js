@@ -16,12 +16,13 @@ const useStyles = makeStyles({
   },
 });
 
-const Category = ({data}) => {
+const Category = ({data, send, setCurrentPage, params}) => {
 
     const classes = useStyles();
+    params.id = data.id
 
     return (
-        <Card className={classes.root}>
+      <Card className={classes.root} onClick={() => send('CATEGORY_SELECTED', {setCurrentPage: setCurrentPage})}>
           <CardActionArea>
               <CardMedia
                   component="img"
@@ -34,18 +35,8 @@ const Category = ({data}) => {
                 <Typography gutterBottom variant="h5" component="h2">
                   {data.name}
                 </Typography>
-                {/* <Grid style={{ width: '100%' }}>
-                    <Typography  variant="body1" display="inline" color="textSecondary" component="p" align='left'>
-                      <b>Price:</b> {data.price}$
-                    </Typography>
-                </Grid> */}
             </CardContent>
           </CardActionArea>
-          {/* <CardActions>
-            <Button size="small" color="primary">
-              Add to cart
-            </Button>
-          </CardActions> */}
         </Card>
   );
 }
