@@ -6,6 +6,7 @@ import CheckoutModal from '../CheckoutModal'
 import { Cart } from '../Cart'
 
 const params = new Object();
+
 export const Pages = () => {
   const [currentPage, setCurrentPage] = useState("Categories");
 

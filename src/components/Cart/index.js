@@ -1,43 +1,127 @@
-import React from 'react';
-import { Container, Typography, Button, Grid } from '@material-ui/core'
-import useStyles from './styles'
-import CartItem from './CartItem'
+import React, {useState}  from 'react';
+
+import Grid from '@material-ui/core/Grid';
+import GET_CART from '../../requests/cart/query.js'
+import { useQuery } from '@apollo/react-hooks'
+import {CartItem} from '../../components/Cart/CartItem'
+
+import { makeStyles } from '@material-ui/core/styles';
+// import Paper from '@material-ui/core/Paper';
+// import Grid from '@material-ui/core/Grid';
+
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+
+import Divider from '@material-ui/core/Divider';
 
 
-export const Cart = ({cart, setCurrentPage}) => {    
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    // width: '100%',
+    width: '80vw',
 
-    const classes = useStyles()
-    const isEmpty = !cart.items.length;
-    const EmptyCart = () => (
-       <Typography variant="subtitle1">You have no items in your shopping cart, start adding some!</Typography>
-    )
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
 
-    const FilledCart = () => (
+export const Cart = ({ setCurrentPage}) => {  
 
-        <h2>heading</h2>
-            // <Grid container spacing={3}>
-            //     cart.items.map((item) => (
-            //         <Grid item key={item.id} xs={12} sm={4} md={4} lg={3} >
-            //             <CartItem item={item}/>
-            //         </Grid>
-            // ))
-            // </Grid>
-            // <div className={classes.cartDetails}>
-            //     <Typography variant="h4">Subtotal: {cart.subtotal}</Typography>
-            //     <div>
-            //         <Button className={classes.emptyButton} size="large" type="button" variant="contained" color="secondary">Empty Cart</Button>
-            //         <Button className={classes.checkoutButton} size="large" type="button" variant="contained" color="primary">Checkout</Button> 
+  const classes = useStyles();
+  const [render, setRender] = useState(1);
 
-            //     </div>
-            // </div>
-    )
+  const {loading, error, data } = useQuery(GET_CART, {variables: {user_id: '1'}});
 
+  console.log("In Cart Index Component");
+  console.log(data);
 
-    return(
-        <Container>
-            <div className={classes.toolbar} />
-            <Typography className={classes.title} variant="h3" gutterBottom >Your Shopping Cart</Typography>
-            {isEmpty ? <EmptyCart /> : <FilledCart />}
-        </Container>
-    )
+  if (loading) return 'Loading...';
+  if (error) return `Error: ${error.message}`;
+
+  const cart = data.cart;
+
+  const isEmpty = !cart.items.length;
+
+  return (
+        <div className={classes.root} style={{ margin: 10, shadow:1}} >
+          <h2>Shopping Cart</h2>
+
+            <Grid
+              container
+              direction="column"
+              justify="center"
+              // alignItems="center"
+              
+              alignItems="flex-end"
+
+            >
+              <Typography variant="body2" color="textSecondary">
+                <Box
+                    // bgcolor="grey.700"
+                    // color="white"
+                    // p={2}
+                    // position="relative"
+                    // right= "0%"
+                    // top={3}
+                    // left="78.3%"
+                    display="flex" 
+                    justifyContent="flex-end"
+                    // flexDirection="row-reverse"
+                    // zIndex="tooltip"
+                >
+                  {/* <Box p={1} bgcolor="grey.300"> */}
+                    <b>Price</b>
+                  {/* </Box> */}
+                    
+                </Box>
+              </Typography>
+
+              <Grid
+                  container
+                  direction="column"
+                  justify="center"
+                  alignItems="flex-start"
+                  >
+                    
+                {cart.items.map((item) => (
+                    <Grid key={item.id} item xs={12}  >
+                        <CartItem key={item.id} item={item} />
+                    </Grid>
+
+                    ))}
+                
+            </Grid>
+
+            <Typography variant="h6" >
+                <Box
+                    // bgcolor="grey.700"
+                    color="black"
+                    // p={2}
+                    // position="relative"
+                    // right= "0%"
+                    // top={3}
+                    // left="78.3%"
+                    display="flex" 
+                    justifyContent="flex-end"
+                    // flexDirection="row-reverse"
+                    // zIndex="tooltip"
+                >
+                  {/* <Box p={1} bgcolor="grey.300"> */}
+                  Subtotal ({cart.itemsCount} items): <b>${cart.subTotal}</b>
+                  {/* </Box> */}
+                    
+                </Box>
+              </Typography>
+
+            </Grid>
+
+            
+        </div>
+        
+
+  );
 }

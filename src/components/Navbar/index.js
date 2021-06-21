@@ -174,7 +174,7 @@ export const Navbar = () => {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
+            OpenShop
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -189,6 +189,19 @@ export const Navbar = () => {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
+
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="open drawer"
+            size = "small"
+            // onClick = {() => }
+          >
+            Products
+          </IconButton>
+
+
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
