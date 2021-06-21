@@ -23,5 +23,5 @@ query cart($user_id: ID!) {
   }
 }`;
 
-export GET_CART
+export default { GET_CART }
 

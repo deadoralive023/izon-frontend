@@ -19,13 +19,15 @@ export const ProductCard = ({product, send, setCurrentPage, params}) => {
     const [addItemToCart] = useMutation(ADD_ITEM_TO_CART);
 
     const handleAddItem = () => {
-        addItemToCart({ variables: { product_id: product.id} });
-        setCurrentPage("Cart");
+        params.id = product.id
+        send('ADD_ITEM_TO_CART', {product_id: product.id})
+        // addItemToCart({ variables: { product_id: product.id} });
+        // setCurrentPage("Cart");
     };
 
     return (
-        <Card className={classes.root} onClick={handleClick}>
-            <CardMedia className={classes.media} component="img" image={product.imageUrl} title={product.name}/>
+        <Card className={classes.root} >
+            <CardMedia className={classes.media} component="img" image={product.imageUrl} title={product.name} onClick={handleClick}/>
             <CardContent>
                 <div className={classes.cardContent}>
                     <Typography variant="h6" gutterBottom>{product.name.substring(0, 30)}...</Typography>
@@ -35,21 +37,21 @@ export const ProductCard = ({product, send, setCurrentPage, params}) => {
             </CardContent>
             <CardActions disableSpacing className={classes.cardActions}>
 
-                <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    // className={classes.button}
-                    startIcon={<AddShoppingCart />}
-                    onClick = {handleAddItem}
+            <Button
+                variant="contained"
+                color="primary"
+                size="small"
+                // className={classes.button}
+                startIcon={<AddShoppingCart />}
+                onClick = {handleAddItem}
 
-                >
-                    Add to Cart
-                </Button>
+            >
+                Add to Cart
+            </Button>
 
-                <IconButton aria-label="Add to Cart">
-                    <AddShoppingCart />
-                </IconButton>
+            <IconButton aria-label="Add to Cart">
+                <AddShoppingCart />
+            </IconButton>
             </CardActions>
         </Card>
     )

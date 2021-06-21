@@ -1,9 +1,8 @@
 import { GET_PRODUCTS }  from '../requests/product/query.js'
-import { useQuery } from '@apollo/react-hooks'
-import { interpret, assign, createMachine } from "xstate";
+import { assign, createMachine } from "xstate";
 import client from '../client.js'
-import gql from 'graphql-tag'
-import productShowMachine from './ProductShowMachine.js' 
+import ADD_ITEM_TO_CART from '../requests/cart/mutation';
+import { useMutation } from '@apollo/react-hooks';
 
 
 export default createMachine({
@@ -25,7 +24,21 @@ export default createMachine({
       },
       idle: {
         on: {
-          ITEM_CLICKED: 'productSelected'
+          ITEM_CLICKED: 'productSelected',
+          ADD_ITEM_TO_CART: 'addingItemtoCart'
+        }
+      },
+      addingItemtoCart: {
+        invoke: {
+          src: 'addingItemTocart',
+          onDone: {
+            target: 'idle'
+          },
+          onError: {
+            target: 'error',
+            actions: ['printError']
+          }
+
         }
       },
       productSelected: {
@@ -43,6 +56,9 @@ export default createMachine({
   services: {
     fetchProducts:  () => {
       return client.query({ query: GET_PRODUCTS })
+    },
+    addingItemTocart: (_, event) => {
+      return client.mutate({ mutation: ADD_ITEM_TO_CART, variables: {cart_id: 1, product_id: event.product_id, quantity: 1}})
     }
   },
   actions: {
@@ -51,6 +67,9 @@ export default createMachine({
     }),
     goToProductShowPage: assign((context, event) => {
       event.setCurrentPage('ProductShow')
+    }),
+    printError: assign((context, event) => {
+      console.log('error')
     })
   }
 });
