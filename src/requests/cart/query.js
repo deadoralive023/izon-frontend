@@ -1,15 +1,4 @@
-// import gql from 'graphql-tag'
 import { gql } from '@apollo/client';
-
-// const GET_CART = gql`
-//     query {
-//         categories{
-//             id
-//             name
-//             imageUrl
-//         }
-//     }
-// `;
 
 const GET_CART = gql`
 query cart($user_id: ID!) {
@@ -33,4 +22,6 @@ query cart($user_id: ID!) {
     }
   }
 }`;
-export default GET_CART
+
+export GET_CART
+

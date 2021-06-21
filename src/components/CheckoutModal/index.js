@@ -5,9 +5,13 @@ import { useStyles } from './styles'
 import Modal from '@material-ui/core/Modal';
 import { useService } from '@xstate/react'
 import machine from '../../machines/CheckoutMachine'
+import { inspect } from '@xstate/inspect'
+
 
 
 export default function CheckoutModal() {
+
+
   const classes = useStyles();
 
   const [ state, send ] = useService(machine, {devTools: true})
@@ -21,6 +25,6 @@ export default function CheckoutModal() {
         <PaymentForm state={state} send={send}/>
       }
       </>
-  </Modal>
+    </Modal>
     )
 }

@@ -1,13 +1,13 @@
 import { GET_PRODUCTS }  from '../requests/product/query.js'
 import { useQuery } from '@apollo/react-hooks'
-import { createMachine, assign } from "xstate";
+import { interpret, assign, createMachine } from "xstate";
 import client from '../client.js'
 import gql from 'graphql-tag'
+import productShowMachine from './ProductShowMachine.js' 
 
 
-// Returns a promise. That's all you need!
-const machine = createMachine({
-    id: "search",
+export default createMachine({
+    id: "productsPage",
     context: {
       products: null
     },
@@ -15,30 +15,42 @@ const machine = createMachine({
     states: {
       loading: {
         invoke: {
-          id: 'fetchProducts',
           src: 'fetchProducts',
           onDone: {
-            target: "success",
-            actions: assign({
-              products: (_, event) => event.data.data.products
-            })
+            target: "idle",
+            actions: 'updateContext'     
           },
           onError: "error"
         },
       },
-      success: {},
+      idle: {
+        on: {
+          ITEM_CLICKED: 'productSelected'
+        }
+      },
+      productSelected: {
+        type: 'final',
+        entry: 'goToProductShowPage'
+      },
       error: {
         on: {
           REFETCH: "loading"
         }
       }
     }
-});
-
-const machineConfig = {
+}, 
+{
   services: {
-    fetchProducts:  client.query({ query: GET_PRODUCTS   }),
+    fetchProducts:  () => {
+      return client.query({ query: GET_PRODUCTS })
+    }
+  },
+  actions: {
+    updateContext: assign((context, event) => {
+      context.products = event.data.data.products
+    }),
+    goToProductShowPage: assign((context, event) => {
+      event.setCurrentPage('ProductShow')
+    })
   }
-};
-
-export default createMachine(machine, machineConfig);
+});

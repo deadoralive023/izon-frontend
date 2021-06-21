@@ -7,8 +7,15 @@ import Button from '@material-ui/core/Button';
 import { useMutation } from '@apollo/react-hooks'
 import ADD_ITEM_TO_CART from '../../../requests/cart/mutation';
 
-export const ProductCard = ({product, setCurrentPage}) => {
+export const ProductCard = ({product, send, setCurrentPage, params}) => {
     const classes = useStyles();
+
+
+    function handleClick(){
+        params.id = product.id
+        send('ITEM_CLICKED', {setCurrentPage: setCurrentPage})
+    }
+
     const [addItemToCart] = useMutation(ADD_ITEM_TO_CART);
 
     const handleAddItem = () => {
@@ -17,7 +24,7 @@ export const ProductCard = ({product, setCurrentPage}) => {
     };
 
     return (
-        <Card className={classes.root}>
+        <Card className={classes.root} onClick={handleClick}>
             <CardMedia className={classes.media} component="img" image={product.imageUrl} title={product.name}/>
             <CardContent>
                 <div className={classes.cardContent}>
