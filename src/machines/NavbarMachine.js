@@ -2,11 +2,11 @@ import { createMachine, interpret,  assign, actions } from 'xstate'
 import client from '../client.js'
 import GET_CATEGORIES from '../requests/category/query.js'
 
-export default () => {
+export default (setContext) => {
     return  createMachine({
     id: 'navbarMachine',
     context: {
-        setCurrentPage: null
+        setContext: setContext
     },
     initial: 'idle',
     states: {
@@ -22,7 +22,9 @@ export default () => {
     {
         actions: {
             goToCart: assign((context, event) => { 
-                context.setCurrentPage('Cart')
+                context.setContext((prev) =>  { 
+                    return {...prev, currentPage: 'Cart' }
+                  })
             })
         }
     })

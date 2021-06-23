@@ -1,9 +1,7 @@
 import { createMachine, interpret,  assign, actions } from 'xstate'
 import csc from 'country-state-city'
 
-const { send } = actions;
-
-const machine = createMachine({
+export default createMachine({
   id: 'checkoutMachine',
   context: {
     addressInfo: {
@@ -76,6 +74,3 @@ const machine = createMachine({
     })
   }
 })
-
-
-export default interpret(machine).start()
