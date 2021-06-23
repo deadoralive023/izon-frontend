@@ -10,16 +10,16 @@ export default createMachine({
     context: {
       products: null
     },
-    initial: "loading",
+    initial: 'loading',
     states: {
       loading: {
         invoke: {
           src: 'fetchProducts',
           onDone: {
-            target: "idle",
+            target: 'idle',
             actions: 'updateContext'     
           },
-          onError: "error"
+          onError: 'error'
         },
       },
       idle: {
@@ -55,6 +55,7 @@ export default createMachine({
 {
   services: {
     fetchProducts:  () => {
+      console.log('fetching products....')
       return client.query({ query: GET_PRODUCTS })
     },
     addingItemTocart: (_, event) => {
@@ -66,7 +67,9 @@ export default createMachine({
       context.products = event.data.data.products
     }),
     goToProductShowPage: assign((context, event) => {
-      event.setCurrentPage('ProductShow')
+      event.setContext((prev) =>  { 
+        return {...prev, currentPage: 'ProductShow' }
+      })
     }),
     printError: assign((context, event) => {
       console.log('error')

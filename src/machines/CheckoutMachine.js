@@ -1,6 +1,5 @@
 import { createMachine, interpret,  assign, actions } from 'xstate'
 import csc from 'country-state-city'
-import { ICountry, IState, ICity } from 'country-state-city'
 
 const { send } = actions;
 

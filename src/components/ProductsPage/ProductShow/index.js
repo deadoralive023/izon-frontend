@@ -1,20 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import Carousel from 'react-material-ui-carousel'
-import {IconButton, ButtonGroup, Button, Typography, Paper, Grid} from '@material-ui/core';
+import {ButtonGroup, Button, Typography, Paper, Grid} from '@material-ui/core';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { useQuery } from '@apollo/react-hooks'
-import { GET_SHOW_PRODUCT }  from '../../../requests/product/query.js'
 import { useStyles, StyledBadge } from './styles.js'
 import { useMachine } from '@xstate/react'
 import machine from '../../../machines/ProductShowMachine.js'
+import Pager from '../../../context/PagerContext'
 
-
-
-
-export const ProductShow = ({setCurrentPage, params}) => {
+export const ProductShow = () => {
 
   const classes = useStyles()
-  const [ state, send ] = useMachine(machine(params.id, setCurrentPage))
+  const [ context, setContext ] = useContext(Pager)
+  const [ state, send ] = useMachine(machine(context.params.id, setContext))
   const { product, item_count} = state.context
 
   return (
@@ -40,7 +37,7 @@ export const ProductShow = ({setCurrentPage, params}) => {
         </ButtonGroup>
         <Grid item className={classes.buttonContainer}>
           <Button
-              onClick={() =>    send('ADD_ITEMS_TO_CART', {product_id: params.id})}
+              onClick={() => send('ADD_ITEMS_TO_CART')}
               variant="contained"
               color="primary"
               size="large"

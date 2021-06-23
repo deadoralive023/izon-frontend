@@ -39,8 +39,10 @@ export default createMachine({
   },
 
   actions: {
-    goToProductsPage: assign((context, event) => {
-      event.setCurrentPage('Products')
+    goToProductsPage: assign((_, event) => {
+      event.setContext((prev) =>  { 
+         return {...prev, currentPage: "Products" }
+      })
     }),
     updateContext: assign((context, event) => {
       context.categories = event.data.data.categories
