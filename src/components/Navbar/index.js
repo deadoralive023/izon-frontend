@@ -1,12 +1,14 @@
-import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+import React, { useState, useContext } from 'react';
+import { 
+  AppBar, 
+  Toolbar, 
+  IconButton, 
+  Typography, 
+  InputBase,
+  Badge,
+  MenuItem,
+  Menu
+} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -17,13 +19,15 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import useStyles from './styles'
 import { useMachine } from '@xstate/react';
 import machine from '../../machines/NavbarMachine.js'
+import Pager from '../../context/PagerContext'
 
 
-export const Navbar = ({setCurrentPage}) => {
+export const Navbar = () => {
   const classes = useStyles();
-  const [state, send] = useMachine(machine(setCurrentPage))
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [ context, setContext ] = useContext(Pager)
+  const [state, send] = useMachine(machine(setContext))
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);

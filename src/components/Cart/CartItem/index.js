@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import useStyles from './styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
-
-import { palette } from '@material-ui/system';
 
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -21,32 +19,6 @@ import {UPDATE_ITEM_QUANTITY, REMOVE_ITEM_FROM_CART} from '../../../requests/ite
 import GET_CART from '../../../requests/cart/query.js'
 
 import { useMutation } from '@apollo/react-hooks'
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    margin: 'auto',
-    width: '80vw',
-    maxWidth: '90vw',
-  },
-  image: {
-    width: 128,
-    height: 128,
-  },
-  img: {
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
-  },
-  button: {
-    margin: theme.spacing(1),
-  },
-
-}));
 
 const Numbers = [1,2,3,4,5,6,7,8,9];
 

@@ -43,13 +43,12 @@ export default function AddresssForm({state, send}) {
   const { states, cities, firstName, lastName, email, phone, address, city, countryState} = state.context.addressInfo
 
   return(
-  <Grid>
-      <CssBaseline />
+  <Grid >
       <Typography variant="h4" align="center" component="h1" gutterBottom>
         🏁 Shipping Address
       </Typography>
       <Paper style={{ padding: 16 }}>
-        <Grid container alignItems="flex-start" spacing={4}>
+        <Grid container spacing={4} >
           <Grid container item xs={12} justify="space-between">
             <Grid item xs={5}>
               <TextField fullWidth variant="outlined" name="firstName" required label="First Name" onChange={handleChange}/>
