@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext} from 'react';
 import Grid from '@material-ui/core/Grid';
 import Category from './Category/index.js'
 import  useStyles from './styles'
 import machine from '../../machines/CategoriesMachine.js'
 import { useMachine } from '@xstate/react'
 
-
   
-export const Categories = ({setCurrentPage, params}) => {
+export const Categories = () => {
   const classes = useStyles();
   const [ state, send ] = useMachine(machine)
   const { categories } = state.context
+  
 
   return (
     state.matches('idle') ?
@@ -20,7 +20,7 @@ export const Categories = ({setCurrentPage, params}) => {
           {
             categories.map((category) => (
             <Grid key={category.id} item>
-              <Category data={category} send={send} setCurrentPage={setCurrentPage} params={params} />
+              <Category data={category} send={send} />
             </Grid>
             ))
           }

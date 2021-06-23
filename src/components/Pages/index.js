@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React, { useContext} from 'react';
 import { Products } from '../ProductsPage'
-import { Categories } from '../CategoriesPage/index.js'
+import { Categories } from '../CategoriesPage'
 import { ProductShow } from '../ProductsPage/ProductShow'
-import CheckoutModal from '../CheckoutModal'
+import { CheckoutModal } from '../CheckoutModal'
 import { Cart } from '../Cart'
+import Pager from '../../context/PagerContext'
 
 const params = new Object();
 
 export const Pages = () => {
-  const [currentPage, setCurrentPage] = useState("Categories");
+  const [context] = useContext(Pager);
 
   return (
-    currentPage === "Products" ?  <Products setCurrentPage={setCurrentPage} params={params}/> :
-    currentPage === "ProductShow" ? <ProductShow setCurrentPage={setCurrentPage} params={params}/> :
-    currentPage === "Categories" ? <Categories setCurrentPage={setCurrentPage} params={params}/> :
-    currentPage === "CheckoutModal" ?  <CheckoutModal setCurrentPage={setCurrentPage} params={params}/> :
-    currentPage === "Cart" ? <Cart setCurrentPage={setCurrentPage} params={params}/> : null
+    context.currentPage === "Products" ?  <Products /> :
+    context.currentPage === "ProductShow" ? <ProductShow /> :
+    context.currentPage  === "Categories" ? <Categories />:
+    context.currentPage  === "CheckoutModal" ?  <CheckoutModal /> :
+    context.currentPage  === "Cart" ? <Cart /> : null
   )
 }

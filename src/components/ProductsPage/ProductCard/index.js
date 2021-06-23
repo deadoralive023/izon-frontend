@@ -1,29 +1,29 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } from '@material-ui/core'
 import { AddShoppingCart } from '@material-ui/icons' 
 import useStyles from './styles'
-
+import Pager from '../../../context/PagerContext'
 import Button from '@material-ui/core/Button';
-import { useMutation } from '@apollo/react-hooks'
-import ADD_ITEM_TO_CART from '../../../requests/cart/mutation';
 
-export const ProductCard = ({product, send, setCurrentPage, params}) => {
-    const classes = useStyles();
+export const ProductCard = ({product, send}) => {
 
 
     function handleClick(){
-        params.id = product.id
-        send('ITEM_CLICKED', {setCurrentPage: setCurrentPage})
+        setContext((prev) =>  { 
+            
+            return {...prev, params: {id: product.id} }
+         })
+        send('ITEM_CLICKED', {setContext: setContext})
     }
 
-    const [addItemToCart] = useMutation(ADD_ITEM_TO_CART);
 
     const handleAddItem = () => {
         params.id = product.id
         send('ADD_ITEM_TO_CART', {product_id: product.id})
-        // addItemToCart({ variables: { product_id: product.id} });
-        // setCurrentPage("Cart");
     };
+
+    const classes = useStyles();
+    const [context, setContext] = useContext(Pager)
 
     return (
         <Card className={classes.root} >

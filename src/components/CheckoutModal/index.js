@@ -9,7 +9,7 @@ import { inspect } from '@xstate/inspect'
 
 
 
-export default function CheckoutModal() {
+export const CheckoutModal =  function() {
 
 
   const classes = useStyles();

@@ -4,14 +4,14 @@ import client from '../client.js'
 import ADD_ITEM_TO_CART from '../requests/cart/mutation';
 
 
-export default (product_id, setCurrentPage) => {
+export default (product_id, setContext) => {
   return createMachine({
       id: 'productShowPage',
       context: {
         id: product_id,
         product: null,
         item_count: 0,
-        setCurrentPage: setCurrentPage
+        setContext: setContext
       },
       initial: 'loading',
       states: {
@@ -90,8 +90,7 @@ export default (product_id, setCurrentPage) => {
         return client.query({query: GET_CART_ID})
       },
       addToCart: (context, event) => {
-        console.log(event.product_id)
-        return client.mutate({ mutation: ADD_ITEM_TO_CART, variables: {cart_id: 1, product_id: event.product_id, quantity: context.item_count}})
+        return client.mutate({ mutation: ADD_ITEM_TO_CART, variables: {cart_id: 1, product_id: context.id, quantity: context.item_count}})
       }
     },
     actions: {
@@ -108,7 +107,10 @@ export default (product_id, setCurrentPage) => {
         context.cart_id = event.data.data.cart_id
       }),
       gotToProductsPage: assign((context, event) => {
-        context.setCurrentPage('Products')
+        context.setContext((prev) =>  { 
+          return {...prev, currentPage: 'Products' }
+        })
+        console.log(context)
       }),
       print_error: assign((context, event) => {
         console.log(error)
