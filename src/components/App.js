@@ -32,7 +32,7 @@ import { Categories } from '../components/CategoriesPage/index.js'
 export const App = () => {
     return (
         <>
-        {/* <Navbar /> */}
+        <Navbar />
         <Routes />
 
 
