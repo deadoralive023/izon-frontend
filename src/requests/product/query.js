@@ -13,8 +13,8 @@ const GET_PRODUCTS = gql`
 
 
 const GET_SHOW_PRODUCT = gql`
-    query{
-        products{
+    query Get_Show_Product($id: Int!){
+        product(id: $id){
             id
             name
             price

@@ -1,45 +1,23 @@
-import { Products } from '../components/ProductsPage'
-import { ProductShow } from '../components/ProductsPage/ProductShow'
 import { Navbar } from '../components/Navbar/index.js'
 import { Footer } from '../components/Footer/index.js'
 import { Routes } from '../Router.js'
-
-
-import { Categories } from '../components/CategoriesPage/index.js'
-
-
-//   return (
-//     <Router>
-//       <div>
-//         {/* A <Switch> looks through its children <Route>s and
-//             renders the first one that matches the current URL. */}
-//         <Switch>
-//           <Route path="/about">
-//             <About />
-//           </Route>
-//           <Route path="/users">
-//             <Users />
-//           </Route>
-//           <Route path="/">
-//             <Home />
-//           </Route>
-//         </Switch>
-//       </div>
-//     </Router>
-//   );
+import ChatBox from './ChatBox/index.js'
+import Pager from '../context/PagerContext'
+import React, { useState} from 'react'
 
 
 export const App = () => {
+    const [context, setContext] = useState({currentPage: 'Categories', params: {id: null}})
+    console.log(context)
     return (
         <>
-        <Navbar />
-        <Routes />
+          <Pager.Provider value={[context, setContext]}>        
+              <Navbar />
+              <ChatBox /> 
+              <Routes />
+          </Pager.Provider>
 
-
-        {/* <ProductShow/> */}
-        {/* <Categories /> */}
-
-        <Footer />
+          <Footer />
         </>
     )
 }

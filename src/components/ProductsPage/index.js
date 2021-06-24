@@ -1,38 +1,28 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import { useQuery } from '@apollo/react-hooks'
 import { ProductCard } from './ProductCard'
-import { GET_PRODUCTS }  from '../../requests/product/query.js'
-import  useStyles from './styles'
-import productsMachine from '../../machines/ProductsMachine.js'
-import { useMachine } from "@xstate/react";
-
-export const  Products = ({setCurrentPage}) => {
-    const classes = useStyles();
-    const [state, send] = useMachine(productsMachine)
-
-    const products = state.matches("success") ? state.context.products : null
+import machine from '../../machines/ProductsMachine.js'
+import { useMachine } from '@xstate/react'
 
 
-    function fun(){
-        setCurrentPage("Cart");
-    }
-
-    return (
-        state.matches("success") ?
-        <main>
-            <Grid container justify="center" spacing={4}>
-
-                {
-                    products.map((product) => (
-                        <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
-                            <ProductCard product={product} setCurrentPage ={setCurrentPage}/>
-                        </Grid>
-                    ))
-                }
-            </Grid>
-        </main> : 
-        <h1> Loading </h1>
+export const  Products = () => {
   
-    )
+  const [ state, send ] = useMachine(machine)
+  const { products } = state.context
+  return (
+    state.matches('idle') ?
+    <main>
+      <Grid container justify="center" spacing={4}>
+        {
+          products.map((product) => (
+              <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
+                  <ProductCard product={product} send={send} />
+              </Grid>
+          ))
+        }
+      </Grid>
+    </main> : 
+    state.matches('error') ? <h1> Error... </h1> :
+    <h1> Loading... </h1> 
+  )
 }
