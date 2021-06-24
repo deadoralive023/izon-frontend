@@ -11,12 +11,13 @@ export const App = () => {
     console.log(context)
     return (
         <>
-        <Pager.Provider value={[context, setContext]}>        
-            <Navbar />
-            <ChatBox /> 
-            <Routes />
-        </Pager.Provider>
-        <Footer />
+          <Pager.Provider value={[context, setContext]}>        
+              <Navbar />
+              <ChatBox /> 
+              <Routes />
+          </Pager.Provider>
+
+          <Footer />
         </>
     )
 }
