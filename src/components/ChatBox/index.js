@@ -20,7 +20,7 @@ export default function ChatBox() {
   })
   
   useEffect(() => {
-    addResponseMessage('Hi How many we help you?');
+    addResponseMessage('Hi! How may we help you?');
     return () => {
       consumer.disconnect()
     };
@@ -44,7 +44,7 @@ export default function ChatBox() {
         handleNewUserMessage={handleNewUserMessage}
         //profileAvatar={logo}
         title="Support"
-        subtitle="Do you have a query?"
+        subtitle="Do you have any query?"
     />
     </div>
   )

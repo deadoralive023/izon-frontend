@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,12 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+
+import {LOGIN_USER} from '../../../requests/user/mutation'
+import { useMutation } from '@apollo/react-hooks'
+
+import { UserContext } from '../../../context/UserContext';
+import localforage from "localforage";
 
 function Copyright() {
   return (
@@ -59,8 +65,55 @@ const useStyles = makeStyles((theme) => ({
 
 export const LoginForm = () => {
 
-// export default function SignInSide() {
   const classes = useStyles();
+
+  const { user, setUser } = useContext(UserContext);
+  // console.log("User In Login Component: ", user);
+  // console.log("UserContext In Login Component: ", UserContext);
+
+  const [loginUser, { data, client }] = useMutation(LOGIN_USER);
+
+  const [inputEmail, setInputEmail] = useState("");
+  const [inputPassword, setInputPassword] = useState("");
+
+  const handleInputEmailChange = (event) => {
+    setInputEmail(event.target.value);
+  };
+
+  const handleInputPasswordChange = (event) => {
+    setInputPassword(event.target.value);
+  };
+
+  const storeData = async (data) => {
+
+    console.log("In Login, storing Data : ", data.user.email);
+    console.log("Local Forage : ",localforage);
+
+    setUser(data.user);
+
+    try {
+      await localforage.setItem("@user-login-token", data.token);
+      await localforage.setItem("@current_user", data.user);
+
+    } catch (e) {
+      console.log("Local Storage Error");
+    }
+  };
+
+  const login = async (event) => {
+    event.preventDefault();
+
+    const loggedin_user = await loginUser({
+        variables: { email: inputEmail, password: inputPassword }
+      }); 
+    console.log("Email In Login Component: ", inputEmail);
+    console.log("Password In Login Component: ", inputPassword);
+
+    // console.log("In Login, after Mutation: ", .data.loginUser.user.name);
+    storeData(loggedin_user.data.loginUser);
+    setInputEmail("");
+    setInputPassword("");
+  };
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -85,6 +138,9 @@ export const LoginForm = () => {
               name="email"
               autoComplete="email"
               autoFocus
+
+              value={inputEmail}
+              onChange = {handleInputEmailChange}
             />
             <TextField
               variant="outlined"
@@ -96,6 +152,9 @@ export const LoginForm = () => {
               type="password"
               id="password"
               autoComplete="current-password"
+
+              value={inputPassword}
+              onChange = {handleInputPasswordChange}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -107,6 +166,7 @@ export const LoginForm = () => {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={login}
             >
               Sign In
             </Button>
