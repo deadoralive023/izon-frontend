@@ -3,7 +3,6 @@ import { Products } from '../ProductsPage'
 import { Categories } from '../CategoriesPage'
 import { ProductShow } from '../ProductsPage/ProductShow'
 
-import CheckoutModal from '../CheckoutModal'
 
 import {SignUpForm} from '../User/Signup/index.js'
 import {LoginForm} from '../User/Login/index.js'
@@ -16,17 +15,14 @@ const params = new Object();
 
 export const  Pages = () => {
 
-    const [currentPage, setCurrentPage] = useState("Signup");
+    const [context, setContext] = useContext(Pager);
 
     return (
-        currentPage === "Products" ?  <Products setCurrentPage={setCurrentPage}/> :
-        currentPage === "ProductShow" ? <ProductShow setCurrentPage={setCurrentPage}/> :
-        currentPage === "Categories" ? <Categories setCurrentPage={setCurrentPage}/> :
-        currentPage === "CheckoutModal" ?  <CheckoutModal setCurrentPage={setCurrentPage} /> :
-        currentPage === "Signup" ?  <SignUpForm setCurrentPage={setCurrentPage} /> :
-        currentPage === "Login" ?  <LoginForm setCurrentPage={setCurrentPage} /> :
-
-        currentPage === "Cart" ? <Cart setCurrentPage={setCurrentPage}/> : null
+        context.currentPage === "Login" ?  <LoginForm  /> :
+        context.currentPage === "SignUp" ?  <SignUpForm /> :
+        context.currentPage === "Products" ?  <Products /> :
+        context.currentPage === "ProductShow" ? <ProductShow /> :
+        context.currentPage === "Categories" ? <Categories /> :
+        context.currentPage  === "Cart" ? <Cart /> : null
     )
-
 }

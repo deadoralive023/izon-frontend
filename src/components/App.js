@@ -7,7 +7,7 @@ import React, { useState} from 'react'
 
 
 export const App = () => {
-    const [context, setContext] = useState({currentPage: 'Categories', params: {id: null}})
+    const [context, setContext] = useState({currentPage: 'Login', params: {id: null}})
     console.log(context)
     return (
         <>
@@ -16,7 +16,6 @@ export const App = () => {
               <ChatBox /> 
               <Routes />
           </Pager.Provider>
-
           <Footer />
         </>
     )
