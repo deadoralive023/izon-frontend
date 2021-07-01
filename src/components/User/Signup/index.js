@@ -13,11 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import CREATE_USER from '../../../requests/user/mutation'
-// import GET_CART from '../../../requests/cart/query.js'
-
+import {CREATE_USER} from '../../../requests/user/mutation'
 import { useMutation } from '@apollo/react-hooks'
-
 
 function Copyright() {
   return (

@@ -1,9 +1,11 @@
-import React, { useContext} from 'react';
+import React, { useContext, useState} from 'react';
+// import React, {useState} from 'react';
+
 import { Products } from '../ProductsPage'
 import { Categories } from '../CategoriesPage'
 import { ProductShow } from '../ProductsPage/ProductShow'
 
-import CheckoutModal from '../CheckoutModal'
+import {CheckoutModal} from '../CheckoutModal/index'
 
 import {SignUpForm} from '../User/Signup/index.js'
 import {LoginForm} from '../User/Login/index.js'
@@ -16,7 +18,7 @@ const params = new Object();
 
 export const  Pages = () => {
 
-    const [currentPage, setCurrentPage] = useState("Signup");
+    const [currentPage, setCurrentPage] = useState("Login");
 
     return (
         currentPage === "Products" ?  <Products setCurrentPage={setCurrentPage}/> :
