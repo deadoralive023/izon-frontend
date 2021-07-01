@@ -12,6 +12,36 @@ const CREATE_USER = gql`
         }
     }
 `;
+
+const LOGIN_USER = gql`
+    mutation LoginUser($email: String!, $password: String!)
+    {
+        loginUser(input: {email: $email, password: $password})
+        {
+            user{
+                name
+                email
+            }
+            token
+        }
+    }
+`;
+
+
+// mutation{
+//     loginUser(input: {
+//       email: "noor@hmail.com",
+//       password: "123123"
+  
+//     }) {
+//       user{
+//         name
+//         email
+//       }
+//       token
+//     }
+//   }
+
 // mutation{
 //     createUser(input: {
 //       email: "noor@hmail.com",
@@ -26,8 +56,8 @@ const CREATE_USER = gql`
 //     }
 //   }
 
-
-export default CREATE_USER
-// export {
-//     ADD_ITEM_TO_CART
-// }
+// export default CREATE_USER
+export {
+    CREATE_USER,
+    LOGIN_USER
+}

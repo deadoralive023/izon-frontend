@@ -23,6 +23,7 @@
     "country-state-city": "^2.2.0",
     "final-form": "^4.20.2",
     "graphql": "^15.5.0",
+    "localforage": "^1.9.0",
     "material-ui-image": "^3.3.2",
     "material-ui-phone-number": "^2.2.6",
     "payment": "^2.4.3",

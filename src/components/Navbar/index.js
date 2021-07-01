@@ -20,7 +20,10 @@ import useStyles from './styles'
 import { useMachine } from '@xstate/react';
 import machine from '../../machines/NavbarMachine.js'
 import Pager from '../../context/PagerContext'
+import { UserContext } from '../../context/UserContext';
 
+import FingerprintIcon from '@material-ui/icons/Fingerprint';
+import Button from '@material-ui/core/Button';
 
 export const Navbar = () => {
   const classes = useStyles();
@@ -28,6 +31,9 @@ export const Navbar = () => {
   const [state, send] = useMachine(machine(setContext))
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+
+  const { user, setUser } = useContext(UserContext);
+
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -49,6 +55,10 @@ export const Navbar = () => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleLoginClick = () => {
+    setContext("Login");
+  };
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -60,8 +70,9 @@ export const Navbar = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>{user?.name }</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
     </Menu>
   );
 
@@ -92,17 +103,27 @@ export const Navbar = () => {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
+
+      {user ? <MenuItem onClick={handleProfileMenuOpen}>
+                <IconButton
+                  aria-label="account of current user"
+                  aria-controls="primary-search-account-menu"
+                  aria-haspopup="true"
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+                <p>{user?.name }</p>
+              </MenuItem>
+            : 
+              <MenuItem onClick={handleLoginClick}>
+                <IconButton aria-label="Login button" color="inherit">
+                  <FingerprintIcon />
+                </IconButton>
+                <p>Sign In</p>
+              </MenuItem>
+        }
+
     </Menu>
   );
 
@@ -141,7 +162,7 @@ export const Navbar = () => {
             color="inherit"
             aria-label="open drawer"
             size = "small"
-            // onClick = {() => }
+            onClick = {() => setContext("Products") }
           >
             Products
           </IconButton>
@@ -164,16 +185,30 @@ export const Navbar = () => {
               <ShoppingCartIcon />
             </Badge>
             </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+            {user ? 
+              <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              : 
+              <IconButton 
+                aria-label="Login button"
+                color="inherit" 
+                size = "small"
+                onClick={handleLoginClick}
+                >
+                Sign In
+                <FingerprintIcon />
+
+              </IconButton>
+            }
+
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
@@ -194,5 +229,3 @@ export const Navbar = () => {
     </div>
   );
 }
-
-// export default Navbar;

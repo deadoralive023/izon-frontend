@@ -1,4 +1,5 @@
 import React from 'react'
+
 import AddressForm from './AddressForm'
 import { PaymentForm } from './PaymentForm'
 import Grid from '@material-ui/core/Grid';
@@ -7,10 +8,8 @@ import Modal from '@material-ui/core/Modal';
 import { useMachine } from '@xstate/react'
 import machine from '../../machines/CheckoutMachine'
 
-
-
-export const CheckoutModal =  function() {
-
+export const CheckoutModal = () => {
+// export const CheckoutModal =  function() {
 
   const classes = useStyles();
 
@@ -29,5 +28,5 @@ export const CheckoutModal =  function() {
       </>
       </Grid>
     </Modal>
-    )
+  )
 }
