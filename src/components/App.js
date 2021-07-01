@@ -10,10 +10,8 @@ import {UserContextProvider} from '../context/UserContext'
 import React, { useState} from 'react'
 
 export const App = () => {
-    const [context, setContext] = useState({currentPage: 'Categories', params: {id: null}})
-
-    // const [user, setUser] = useState("Hamza");
-    // console.log("Context: ",context)
+    const [context, setContext] = useState({currentPage: 'Login', params: {id: null}})
+    console.log(context)
     return (
         <>
             <UserContextProvider>
@@ -23,7 +21,6 @@ export const App = () => {
                     <Routes />
                 </Pager.Provider>
             </UserContextProvider>
-
           <Footer />
         </>
     )
