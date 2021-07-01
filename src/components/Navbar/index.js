@@ -25,6 +25,8 @@ import { UserContext } from '../../context/UserContext';
 import FingerprintIcon from '@material-ui/icons/Fingerprint';
 import Button from '@material-ui/core/Button';
 
+import localforage from "localforage";
+
 export const Navbar = () => {
   const classes = useStyles();
   const [ context, setContext ] = useContext(Pager)
@@ -59,6 +61,13 @@ export const Navbar = () => {
     setContext("Login");
   };
 
+  const handleLogoutClick = async() => {
+    await localforage.removeItem("@current_user");
+    setUser();
+    setContext("Products");
+    handleMenuClose();
+  };
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -67,12 +76,14 @@ export const Navbar = () => {
       id={menuId}
       keepMounted
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
+      // open={isMenuOpen}
+      open={Boolean(anchorEl)}
+
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>{user?.name }</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
+      <MenuItem onClick={handleLogoutClick}>Sign Out</MenuItem>
     </Menu>
   );
 
